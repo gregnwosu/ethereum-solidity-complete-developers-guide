@@ -10,7 +10,8 @@ let inbox;
 beforeEach(
   async () => {
   //get a list of all accounts
-  accounts = await web3.eth.getAccounts();
+      accounts = await web3.eth.getAccounts();
+      console.log(interface);
   //use one of those accounts to deploy the contract
   inbox = await new web3.eth.Contract(JSON.parse(interface))
      .deploy({ data: bytecode, arguments : ['Hi there']})
