@@ -1,0 +1,116 @@
+
+*  notes
+** ethereum dapps
+*** install solidity compiler
+#+BEGIN_SRC bash
+npm install --save solc
+
+#+END_SRC
+*** node compile.js
+#+BEGIN_SRC emacs
+node compile.js
+#+END_SRC
+
+
+#+BEGIN_SRC js
+const path = require('path');
+const fs = require('fs');
+const solc = require('solc');
+
+const inboxPath = path.resolve(__dirname, 'contracts', 'Inbox.sol');
+const source  = fs.readFileSync(inboxPath, 'utf8');
+module exports  = solc.compile(source,1).contracts[':Inbox'];
+
+#+END_SRC
+when fininshed
+compile with
+#+BEGIN_SRC bash
+node compile.js
+
+#+END_SRC
+*** installing ganache/mocha/web3 click
+web3 is unstable install specific version by
+#+BEGIN_SRC bash
+npm install --save mocha ganache web3@1.0.0-beta.26
+#+END_SRC
+*** Web3
+**** installation
+#+BEGIN_SRC bash
+npm install --save  --python=/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python2 mocha ganache-cli web3@1.0.0-beta.26
+
+#+END_SRC
+**** test functions
+import creates constructor functions
+instances are createed on a per ethereum netweork basis
+each instance needs a provider that is used to communicated with a
+specific network
+ #+BEGIN_SRC javascript
+ const assert = require('assert');
+ const ganache = require('ganache-cli');
+ const Web3 = require('web3');
+ #+END_SRC
+**** mocha test structure
+https://www.udemy.com/ethereum-and-solidity-the-complete-developers-guide/learn/v4/t/lecture/9020464?start=0
+- it
+- describe
+for a group of tests
+- beforeEach
+**** test example
+#+BEGIN_SRC javascript
+const assert = require('assert');
+const ganache = require('ganache-cli');
+const Web3 = require('web3');
+const web3  = new Web3(ganache.provider());
+
+class Car {
+  park() {
+    return 'stopped';
+  }
+  drive(){
+    return 'vroom';
+  }
+}
+
+let car;
+beforeEach(() => {
+    car = new Car();
+});
+
+describe('Car', () => {
+  it('can park', () => {
+  assert.equal(car.park(), 'stopped');
+  });
+  it('can drive', () => {
+    assert.equal(car.drive(), 'vroom');
+  });
+});
+
+
+#+END_SRC
+****  package.json
+test setup
+in package.json ensure that the scripts file has mocha written as a
+test
+#+BEGIN_SRC json
+{
+  "name": "inbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ganache-cli": "^6.1.0",
+    "mocha": "^5.2.0",
+    "solc": "^0.4.24"
+  }
+}
+#+END_SRC
+**** run tests using
+#+BEGIN_SRC bash
+npm run test
+
+#+END_SRC
