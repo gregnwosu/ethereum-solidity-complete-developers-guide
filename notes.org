@@ -1,6 +1,6 @@
 
 *  notes
-** ethereum dapps
+** developing a test app with ganache
 *** install solidity compiler
 #+BEGIN_SRC bash
 npm install --save solc
@@ -33,8 +33,7 @@ web3 is unstable install specific version by
 #+BEGIN_SRC bash
 npm install --save mocha ganache web3@1.0.0-beta.26
 #+END_SRC
-*** Web3
-**** installation
+*** Weinstallation
 #+BEGIN_SRC bash
 npm install --save  --python=/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python2 mocha ganache-cli web3@1.0.0-beta.26
 
@@ -87,7 +86,7 @@ describe('Car', () => {
 
 
 #+END_SRC
-****  package.json
+**** package.json
 test setup
 in package.json ensure that the scripts file has mocha written as a
 test
@@ -114,3 +113,28 @@ test
 npm run test
 
 #+END_SRC
+** installing to a real network
+*** infura.io
+for finding a node to connect to .
+**** api key
+  #+BEGIN_EXAMPLE
+
+  xOnzjjj8adJh8rkHkNTT
+  #+END_EXAMPLE
+**** apis
+***** Main Ethereum Network
+ https://mainnet.infura.io/xOnzjjj8adJh8rkHkNTT
+***** Test Ethereum Network (Ropsten)
+ https://ropsten.infura.io/xOnzjjj8adJh8rkHkNTT
+***** Test Ethereum Network (Rinkeby)
+ https://rinkeby.infura.io/xOnzjjj8adJh8rkHkNTT
+***** Test Ethereum Network (Kovan)
+ https://kovan.infura.io/xOnzjjj8adJh8rkHkNTT
+*****  IPFS Gateway
+ https://ipfs.infura.io
+***** IPFS RPC
+ https://ipfs.infura.io:5001
+*** truffle
+#+BEGIN_EXAMPLE
+npm install --save truffle-hdwallet-provider
+#+END_EXAMPLE
